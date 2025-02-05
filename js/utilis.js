@@ -102,15 +102,31 @@ function animate() {
     keys.ArrowUp.pressed = false;
   }
 
-  if (attackCollision(player, enemy) && player.isAttacking) {
+  if (
+    attackCollision(player, enemy) &&
+    player.isAttacking &&
+    player.frameCurrent === 4
+  ) {
     console.log("hit");
     player.isAttacking = false;
-    enemy.health -= 20;
+    enemy.takeHit();
     document.querySelector("#enemyHealth").style.width = enemy.health + "%";
   }
-  if (attackCollision(enemy, player) && enemy.isAttacking) {
-    player.health -= 20;
+
+  if (player.isAttacking && player.animateFrames === 4) {
+    player.isAttacking = false;
+  }
+  if (
+    attackCollision(enemy, player) &&
+    enemy.isAttacking &&
+    enemy.frameCurrent === 2
+  ) {
+    player.takeHit();
     document.querySelector("#playerHealth").style.width = player.health + "%";
+    enemy.isAttacking = false;
+  }
+
+  if (enemy.isAttacking && enemy.animateFrames === 4) {
     enemy.isAttacking = false;
   }
 
