@@ -119,7 +119,7 @@ function animate() {
     });
   }
 
-  if (player.isAttacking && player.animateFrames === 4) {
+  if (player.isAttacking && player.frameCurrent === 4) {
     player.isAttacking = false;
   }
   if (
@@ -134,7 +134,7 @@ function animate() {
     enemy.isAttacking = false;
   }
 
-  if (enemy.isAttacking && enemy.animateFrames === 4) {
+  if (enemy.isAttacking && enemy.frameCurrent === 2) {
     enemy.isAttacking = false;
   }
 
