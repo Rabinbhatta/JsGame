@@ -44,8 +44,11 @@ function animate() {
   window.requestAnimationFrame(animate);
   c.fillStyle = "black";
   c.fillRect(0, 0, canvas.width, canvas.height);
+
   background.update();
   shop.update();
+  c.fillStyle = "rgba(255, 255, 255, 0.1)";
+  c.fillRect(0, 0, canvas.width, canvas.height);
   player.update();
   enemy.update();
 
@@ -110,7 +113,10 @@ function animate() {
     console.log("hit");
     player.isAttacking = false;
     enemy.takeHit();
-    document.querySelector("#enemyHealth").style.width = enemy.health + "%";
+
+    gsap.to("#enemyHealth", {
+      width: enemy.health + "%",
+    });
   }
 
   if (player.isAttacking && player.animateFrames === 4) {
@@ -122,7 +128,9 @@ function animate() {
     enemy.frameCurrent === 2
   ) {
     player.takeHit();
-    document.querySelector("#playerHealth").style.width = player.health + "%";
+    gsap.to("#playerHealth", {
+      width: player.health + "%",
+    });
     enemy.isAttacking = false;
   }
 
